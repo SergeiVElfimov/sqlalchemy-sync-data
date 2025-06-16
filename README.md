@@ -50,7 +50,7 @@ class UserHandler(BaseHandler):
         "id": "id",
         "first_name": "first_name",
         "last_name": "last_name",
-        "username": "email",
+        "email": "username",
     }
     field_name_as_external_id = 'id'
     getter_class = UserGetter
@@ -63,11 +63,16 @@ from .handlers import UserHandler
 class UserSyncronizator(BaseSyncronizator):
     handler_classes = (UserHandler,)
 
-from .synchronizators import UserSyncronizator
 # Run sync data
+from .synchronizators import UserSyncronizator
+
 syncronizator = UserSyncronizator()
 syncronizator.run()
 ```
+
+## Environment variables
+
+SQLALCHEMY_SYNC_DATA_LOCAL_TIMEZONE - setting time zone (default value "UTC").
 
 ## Required
 
