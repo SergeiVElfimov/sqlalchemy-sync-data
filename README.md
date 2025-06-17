@@ -23,26 +23,18 @@ class User(CommonBase):
 
 # getters.py
 
-from sqlalchemy_sync_data.getters import PostgresGetter
-from sqlalchemy.engine import URL
+from sqlalchemy_sync_data.getters import SQLiteGetter
 
 
-class UserGetter(PostgresGetter):
+class UserGetter(SQLiteGetter):
     template_query = """select id, first_name, last_name, email from users"""
-    connection_settings = URL(
-        drivername="postgresql+psycopg2"
-        username="user",
-        password="password",
-        host="localhost",
-        port=5432,
-        database="database",
-    )
+    connection_settings = {"database": "sqlalchemy_sync_data.sqlite"}
 
 # handlers.py
 
 from sqlalchemy_sync_data.handlers import BaseHandler
 from .getters import UserGetter
-from .model import User
+from .models import User
 
 class UserHandler(BaseHandler):
     model = User
