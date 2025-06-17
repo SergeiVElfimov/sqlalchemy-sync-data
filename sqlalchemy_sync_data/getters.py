@@ -2,7 +2,7 @@ import logging
 import typing
 from string import Formatter
 
-from .connectors import BasicConnector, HttpClickHouseConnector, PostgresConnector
+from .connectors import BasicConnector, HttpClickHouseConnector, PostgresConnector, SQLiteConnector
 
 logger = logging.getLogger(__name__)
 BasicConnectorType = typing.TypeVar("BasicConnectorType", bound=BasicConnector)
@@ -79,6 +79,12 @@ class BaseGetter(typing.Generic[BasicConnectorType]):
     @property
     def response(self):
         return self.get_response()
+
+
+class SQLiteGetter(BaseGetter):
+    """Base class for getting data from SQLite."""
+
+    connector = SQLiteConnector
 
 
 class PostgresGetter(BaseGetter):

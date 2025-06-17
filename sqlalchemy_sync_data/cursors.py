@@ -7,8 +7,7 @@ class BaseCursor(ABC):
     connection_timeout: int
 
     @abstractmethod
-    @classmethod
-    def connect(cls, *args, **kwargs): ...
+    def connect(self, *args, **kwargs): ...
 
     @abstractmethod
     def fetchone(self): ...

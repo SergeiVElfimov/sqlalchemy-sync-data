@@ -1,4 +1,5 @@
 import logging
+import sqlite3
 import threading
 import typing
 from datetime import datetime
@@ -25,7 +26,7 @@ class BasicConnector(threading.Thread, typing.Generic[BaseCursorType]):
     to fetch data as you prefer. Also may be used as a separate thread.
 
     Params:
-        connection_settings - dict with connection settings from settings.py.
+        connection_settings - connection settings.
         query - SQL query as string, e.g. SELECT id, code, name FROM products.
         output_queue - Required if running connector as separate process). Queue object to put fetching results in it.
         error_message - Error message.
@@ -36,7 +37,7 @@ class BasicConnector(threading.Thread, typing.Generic[BaseCursorType]):
 
     def __init__(
         self,
-        connection_settings: dict,
+        connection_settings,
         query,
         output_queue: Queue = Queue(),
         error_message: str = "ERROR",
@@ -51,8 +52,7 @@ class BasicConnector(threading.Thread, typing.Generic[BaseCursorType]):
         super().__init__(**kwargs)
 
     def make_connection_string(self):
-        formatted_string = "{server}{database}{db_username}{db_password}".format(**self._connection_settings)
-        return formatted_string
+        return self._connection_settings
 
     def get_cursor(self): ...
 
@@ -98,10 +98,14 @@ class BasicConnector(threading.Thread, typing.Generic[BaseCursorType]):
             logger.exception("The error occurred while trying to fetch data from external database")
 
 
-class PostgresConnector(BasicConnector):
-    def make_connection_string(self):
-        return self._connection_settings
+class SQLiteConnector(BasicConnector):
+    def get_cursor(self):
+        connect = sqlite3.connect(**self.make_connection_string())
+        connect.row_factory = sqlite3.Row
+        return connect.cursor()
 
+
+class PostgresConnector(BasicConnector):
     def get_cursor(self):
         cursor = psycopg2.connect(**self.make_connection_string(), cursor_factory=DictCursor).cursor()
         return cursor
@@ -112,6 +116,10 @@ class HttpClickHouseConnector(BasicConnector):
         raw_query, ordered_fields_with_type = query
         self._ordered_fields_with_type = ordered_fields_with_type
         super().__init__(connection_settings=connection_settings, query=raw_query, output_queue=output_queue, **kwargs)
+
+    def make_connection_string(self):
+        formatted_string = "{server}{database}{db_username}{db_password}".format(**self._connection_settings)
+        return formatted_string
 
     def get_cursor(self):
         return HttpClickHouseCursor.connect(
