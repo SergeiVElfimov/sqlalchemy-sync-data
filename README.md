@@ -78,13 +78,3 @@ SQLALCHEMY_SYNC_DATA_LOCAL_TIMEZONE - setting time zone (default value "UTC").
 
 ## Installation
 ```pip install sqlalchemy-sync-data```
-
-## Contribution
-
-You can run tests with `pytest`.
-
-```
-pip install poetry
-poetry install
-pytest
-```
