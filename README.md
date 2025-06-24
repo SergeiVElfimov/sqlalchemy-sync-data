@@ -78,3 +78,7 @@ SQLALCHEMY_SYNC_DATA_LOCAL_TIMEZONE - setting time zone (default value "UTC").
 
 ## Installation
 ```pip install sqlalchemy-sync-data```
+
+## Contributing
+
+Before contributing please read our [contributing guidelines](CONTRIBUTING.md).
