@@ -1,8 +1,9 @@
 # SQLAlchemy sync data
 
 [![build-status-image]][build-status]
-[![pypi-version]][pypi]
 [![codeql-image]][codeql]
+[![pypi-version]][pypi]
+[![pypi-downloads]][pypi]
 
 Synchronization of data from different sources into one database using SQLAlchemy.
 
@@ -90,6 +91,7 @@ Before contributing please read our [contributing guidelines](CONTRIBUTING.md).
 [build-status-image]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/python-package.yml/badge.svg
 [build-status]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/python-package.yml
 [pypi-version]: https://img.shields.io/pypi/v/sqlalchemy-sync-data.svg
+[pypi-downloads]: https://img.shields.io/pypi/dm/sqlalchemy-sync-data?color=%232E73B2&logo=python&logoColor=%23F9D25F
 [pypi]: https://pypi.org/project/sqlalchemy-sync-data/
 [codeql-image]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/codeql.yml/badge.svg
 [codeql]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/codeql.yml
