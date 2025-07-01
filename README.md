@@ -1,5 +1,8 @@
 # SQLAlchemy sync data
 
+[![build-status-image]][build-status]
+[![pypi-version]][pypi]
+
 Synchronization of data from different sources into one database using SQLAlchemy.
 
 ## Examples
@@ -82,3 +85,8 @@ SQLALCHEMY_SYNC_DATA_LOCAL_TIMEZONE - setting time zone (default value "UTC").
 ## Contributing
 
 Before contributing please read our [contributing guidelines](CONTRIBUTING.md).
+
+[build-status-image]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/python-package.yml/badge.svg
+[build-status]: https://github.com/SergeiVElfimov/sqlalchemy-sync-data/actions/workflows/python-package.yml
+[pypi-version]: https://img.shields.io/pypi/v/sqlalchemy-sync-data.svg
+[pypi]: https://pypi.org/project/sqlalchemy-sync-data/
